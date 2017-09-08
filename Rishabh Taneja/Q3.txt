@@ -1,0 +1,93 @@
+
+ 
+#define FOR(I,A,B) for(int I = (A); I < (B); ++I)
+#define REP(I,N)   FOR(I,0,N)
+#define ALL(A)     (A).begin(), (A).end()
+ 
+using namespace std;
+typedef long long BInteger; 
+ 
+ 
+
+BInteger am( BInteger x, BInteger y, BInteger m )
+{
+	  x %= m;
+	    y %= m;
+	      BInteger s = x-m+y; // -m <= s < m-1
+	        return s < 0 ? s + m : s;
+}
+ 
+BInteger tm( BInteger x, BInteger y, BInteger m )
+{
+	  x %= m;
+	    y %= m;
+	      BInteger a = x < y ? x : y; 
+	        BInteger b = x < y ? y : x; 
+		  BInteger p = 0;
+		    for (; a != 0; a >>= 1, b = am(b,b,m) )
+			        if (a&1) product = am(p,b,m);
+		      return p;
+}
+ 
+int main()
+{
+	int c;
+	scanf("%d",&c);
+	while(c--)
+	{
+		unsigned long long  int z;
+		unsigned long long  int r,s,t;
+		scanf("%llu",&z);
+		unsigned long long int arr[z],fin[z],a,b,c;
+		for(i=0;i<z;i++)
+		{
+			scanf("%llu",&arr[i]);
+		}
+		scanf("%llu %llu %llu",&a,&b,&c);
+		char str[z+1];
+		scanf("%s",str);
+		
+		a=a%c;b=b%c;
+		unsigned long long int zt=0,ft=z-1,multi=1,addd=0;
+		bool reverse=false;
+		for(i=0;i<z;i++)
+		{
+			if(str[i]=='R')
+			{
+				reverse=!reverse;
+			}
+			if(reverse)
+			{
+				fin[i]=arr[zt];
+				zt--;
+			}
+			else
+			{
+				fin[i]=arr[lt];
+				ft++;
+			}
+		}
+		for(i=0;i<z;i++)
+		{
+			if(str[i]=='A')
+			{
+				addd=(addd+a)%c;
+			}
+			else if(str[i]=='M')
+			{
+				addd=tm(addd,b,c);
+				multi=tm(multi,b,c);
+			}
+			fin[i]=  ( tm(fin[i]%c,multi,c) + addd ) %c;
+ 
+		}
+		for(i=0;i<z-1;i++)
+		{
+			printf("%llu ",fin[i]%c);
+		}
+		printf("%llu\n",fin[i]%c);
+ 
+ 
+	}
+	return 0;
+}
