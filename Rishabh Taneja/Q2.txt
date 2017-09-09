@@ -1,0 +1,44 @@
+using namespace std;
+  
+
+  int ct(int f,int *tt,int *rt,int *ct){
+  	int mt = 0;
+  	for(int i=0;i<f;i++)
+ {
+  
+  		if(i != f-1)
+ {
+  
+  			if(mt<=rt[i]){
+  				int wait = rt[i]-mt;
+  				mt=mt+wait; 
+  				mt += tt[i];
+  			}else if(mt > rt[i] && mt <= ct[i]){
+  				mt += tt[i];
+  			}else{
+  				return -1;  
+  			}
+  		}else if(i == f-1){
+  			if(mt <= ct[f-1]){
+  				mt = ct[f-1];
+  			}else 
+  				return -1;
+  		}
+  	}
+  	return mt;
+ }
+  int main(){
+  	int f;
+  	cin>>f;
+  	int tt[f-1],rt[f],ct[f];
+  	for(int i=0 ; i<f-1;i++){
+  		cin>> tt[i];
+  	}
+  	for(int i=0;i<f;i++){
+  		cin>> rt[i];
+  	}
+  	for(int i=0;i<f;i++){
+  		cin>> ct[i];
+  	}
+  	cout<<ct(f,tt,rt,ct);
+ } 
