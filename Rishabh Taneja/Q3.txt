@@ -1,0 +1,87 @@
+using namespace std;
+typedef long long Bint; 
+ 
+ 
+
+Bint am( Bint x, Bint y, Bint m )
+{
+	  x %= m;
+	    y %= m;
+	      Bint sum = x-m+y;
+	        return sum < 0 ? sum + m : sum;
+}
+ 
+Bint tm( Bint x, Bint y, Bint m )
+{
+	  x %= m;
+	    y %= m;
+	      Bint a = x < y ? x : y; // min
+	        Bint b = x < y ? y : x; // max
+		  Bint p = 0;
+		    for (; a != 0; a >>= 1, b = am(b,b,m) )
+			        if (a&1) product = am(p,b,m);
+		      return p;
+}
+ 
+int main()
+{
+	int ct;
+	scanf("%d",&ct);
+	while(ct--)
+	{
+		unsigned long long  int g;
+		unsigned long long  int i,j,k;
+		scanf("%llu",&n);
+		unsigned long long int arrr[g],fini[g],a,b,c;
+		for(i=0;i<g;i++)
+		{
+			scanf("%llu",&arrr[i]);
+		}
+		scanf("%llu %llu %llu",&a,&b,&c);
+		char str[n+1];
+		scanf("%s",str);
+		
+		a=a%c;b=b%c;
+		unsigned long long int mt=0,gt=n-1,multi=1,addi=0;
+		bool rev=false;
+		for(i=0;i<n;i++)
+		{
+			if(str[i]=='R')
+			{
+				rev=!rev;
+			}
+			if(rev)
+			{
+				fini[i]=arr[gt];
+				gt--;
+			}
+			else
+			{
+				fini[i]=arr[mt];
+				mt++;
+			}
+		}
+		for(i=0;i<n;i++)
+		{
+			if(str[i]=='A')
+			{
+				addi=(addi+a)%c;
+			}
+			else if(str[i]=='M')
+			{
+				addi=tm(addi,b,c);
+				multi=tm(multi,b,c);
+			}
+			fini[i]=  ( tm(fini[i]%c,multi,c) + addi ) %c;
+ 
+		}
+		for(i=0;i<n-1;i++)
+		{
+			printf("%llu ",fini[i]%c);
+		}
+		printf("%llu\n",fini[i]%c);
+ 
+ 
+	}
+	return 0;
+}
